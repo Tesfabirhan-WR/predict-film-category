@@ -30,31 +30,31 @@ Project objective: take a horror/comedy film classifier from a notebook to a pub
 - [x]  **1.2** Install and pin libraries in requirements.txt (pandas, scikit-learn, tensorflow-cpu, keras-tuner, optuna, joblib, fastapi, uvicorn, pytest)
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 0.5 h | Status: Not started
     - Done when: pip install -r requirements.txt works
-- [ ]  **1.3** Part 1: Audit and cleaning (load CSV, count rows and categories, text lengths, str.strip, drop_duplicates, one-sentence finding)
+- [x]  **1.3** Part 1: Audit and cleaning (load CSV, count rows and categories, text lengths, str.strip, drop_duplicates, one-sentence finding)
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 1 h | Status: Not started
     - Done when: One sentence: what was found, what was fixed
-- [ ]  **1.4** Part 2: Split with train_test_split + stratify: 60% train / 20% test / 20% production
+- [x]  **1.4** Part 2: Split with train_test_split + stratify: 60% train / 20% test / 20% production
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 0.5 h | Status: Not started
     - Done when: Class proportions printed for the 3 parts
-- [ ]  **1.5** Part 3: TF-IDF fitted on train only, transform the 3 parts with the same object
+- [x]  **1.5** Part 3: TF-IDF fitted on train only, transform the 3 parts with the same object
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 0.5 h | Status: Not started
     - Done when: No fit call on test or production
-- [ ]  **1.6** Part 4a: Baselines - logistic regression + Naive Bayes, F1 on 5 seeds (validation from train)
+- [x]  **1.6** Part 4a: Baselines - logistic regression + Naive Bayes, F1 on 5 seeds (validation from train)
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 1 h | Status: Not started
     - Done when: Mean and spread of F1 per model
-- [ ]  **1.7** Part 4b: Simple network (1 hidden layer, small dropout, EarlyStopping), F1 on 5 seeds
+- [x]  **1.7** Part 4b: Simple network (1 hidden layer, small dropout, EarlyStopping), F1 on 5 seeds
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 1 h | Status: Not started
     - Done when: Mean and spread of F1
-- [ ]  **1.8** Compute noise margin 1.96*sqrt(p(1-p)/n) for each score
+- [x]  **1.8** Compute noise margin 1.96*sqrt(p(1-p)/n) for each score
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 0.5 h | Status: Not started
     - Done when: Table of scores +/- margin
-- [ ]  **1.9** Add a title for each notebook part and re-run top to bottom
+- [x]  **1.9** Add a title for each notebook part and re-run top to bottom
     - Project: P1 · Notebook (8 parts) | Priority: Medium | Estimate: 0.5 h | Status: Not started
     - Done when: No error
-- [ ]  **1.10** Commit and push; end-of-day notes in Notion
+- [x]  **1.10** Commit and push; end-of-day notes in Notion
     - Project: P1 · Notebook (8 parts) | Priority: Low | Estimate: 0.25 h | Status: Not started
     - Done when: Commit visible on GitHub
-- [ ]  **1.11** Buffer
+- [x]  **1.11** Buffer
     - Project: Buffer | Priority: Low | Estimate: 0.75 h | Status: Not started
 
 ## 📅 Day 2
@@ -63,28 +63,28 @@ Project objective: take a horror/comedy film classifier from a notebook to a pub
 
 **Total:** 7.0 h | **Date:** (to fill)
 
-- [ ]  **2.1** Part 5a: write build_model(…) with 5 hyperparameters (layers, neurons, dropout, regularisation, learning rate)
+- [x]  **2.1** Part 5a: write build_model(…) with 5 hyperparameters (layers, neurons, dropout, regularisation, learning rate)
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 0.75 h | Status: Not started
     - Done when: Function returns a compiled model
-- [ ]  **2.2** Part 5b: KerasTuner RandomSearch, 20 trials (disable tracking files if Windows errno 22 / tensorboard)
+- [x]  **2.2** Part 5b: KerasTuner RandomSearch, 20 trials (disable tracking files if Windows errno 22 / tensorboard)
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 1 h | Status: Not started
     - Done when: Best score and best settings printed
-- [ ]  **2.3** Part 6: Optuna with same 5 settings, same ranges, 20 trials, reuse build_model; compare both tools with noise margin
+- [x]  **2.3** Part 6: Optuna with same 5 settings, same ranges, 20 trials, reuse build_model; compare both tools with noise margin
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 1.25 h | Status: Not started
     - Done when: Comparison sentence: better or within margin
-- [ ]  **2.4** Part 7a: retrain best settings on full train set, 5 seeds; compare with starting network and best simple model
+- [x]  **2.4** Part 7a: retrain best settings on full train set, 5 seeds; compare with starting network and best simple model
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 1 h | Status: Not started
     - Done when: Comparison table
-- [ ]  **2.5** Part 7b: measure on test set ONCE; honest conclusion
+- [x]  **2.5** Part 7b: measure on test set ONCE; honest conclusion
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 0.5 h | Status: Not started
     - Done when: Written conclusion
-- [ ]  **2.6** Part 8: save to model/ (.keras, TF-IDF joblib, metrics.json UTF-8, reference data sample)
+- [x]  **2.6** Part 8: save to model/ (.keras, TF-IDF joblib, metrics.json UTF-8, reference data sample)
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 1 h | Status: Not started
     - Done when: 4 files present in model/
-- [ ]  **2.7** Restart kernel, run notebook top to bottom; push notebook + model/
+- [x]  **2.7** Restart kernel, run notebook top to bottom; push notebook + model/
     - Project: P1 · Notebook (8 parts) | Priority: High | Estimate: 0.5 h | Status: Not started
     - Done when: Notebook runs with no error, push done
-- [ ]  **2.8** Buffer (KerasTuner/Windows issues are common)
+- [x]  **2.8** Buffer (KerasTuner/Windows issues are common)
     - Project: Buffer | Priority: Low | Estimate: 1 h | Status: Not started
 
 ## 📅 Day 3

@@ -1,0 +1,22 @@
+{
+  "model_version": "1.0.0",
+  "f1_test": 0.8485,
+  "test_size": 469,
+  "noise_margin": 0.0325,
+  "best_params": {
+    "n_layers": 2,
+    "units": 32,
+    "dropout": 0.2,
+    "l2": 1.2232117875737861e-05,
+    "lr": 0.005977728042983696
+  },
+  "library_versions": {
+    "python": "3.11.13",
+    "numpy": "2.4.6",
+    "pandas": "3.0.6",
+    "scikit-learn": "1.9.1",
+    "tensorflow": "2.21.0",
+    "spacy": "3.8.16",
+    "joblib": "1.6.0"
+  }
+}
