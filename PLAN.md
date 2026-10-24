@@ -11,24 +11,24 @@ Project objective: film classifier (horror/comedy) from a notebook to a public A
 
 | Fait | ID | Tâche | Dépend de | Charge estimée (h) | Charge réelle (h) | Ressources humaines | Ressources matérielles | Ressources techniques | Ressources financières | Date prévue |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| [ ] | 1.1 | Create GitHub repo, local folders (notebooks/, model/, src/, tests/), virtual env, .gitignore, first commit | - | 0.5 |  | Me (1 pers.) | PC, internet | Git, GitHub, VS Code | 0 € | Mon 26/10/2026 |
-| [ ] | 1.2 | Install and pin libraries in requirements.txt (pandas, scikit-learn, tensorflow-cpu, keras-tuner, optuna, joblib, fastapi, uvicorn, pytest) | 1.1 | 0.5 |  | Me (1 pers.) | PC, internet | Python, pip, venv | 0 € | Mon 26/10/2026 |
-| [ ] | 1.3 | Part 1: Audit and cleaning (load CSV, count rows and categories, text lengths, str.strip, drop_duplicates, one-sentence finding) | 1.2 | 1 |  | Me (1 pers.) | PC, internet | pandas | 0 € | Mon 26/10/2026 |
-| [ ] | 1.4 | Part 2: Split with train_test_split + stratify: 60% train / 20% test / 20% production | 1.3 | 0.5 |  | Me (1 pers.) | PC, internet | scikit-learn | 0 € | Mon 26/10/2026 |
-| [ ] | 1.5 | Part 3: TF-IDF fitted on train only, transform the 3 parts with the same object | 1.4 | 0.5 |  | Me (1 pers.) | PC, internet | TfidfVectorizer | 0 € | Mon 26/10/2026 |
-| [ ] | 1.6 | Part 4a: Baselines - logistic regression + Naive Bayes, F1 on 5 seeds (validation from train) | 1.5 | 1 |  | Me (1 pers.) | PC, internet | scikit-learn, f1_score | 0 € | Mon 26/10/2026 |
-| [ ] | 1.7 | Part 4b: Simple network (1 hidden layer, small dropout, EarlyStopping), F1 on 5 seeds | 1.5 | 1 |  | Me (1 pers.) | PC, internet | Keras, EarlyStopping | 0 € | Mon 26/10/2026 |
-| [ ] | 1.8 | Compute noise margin 1.96*sqrt(p(1-p)/n) for each score | 1.6, 1.7 | 0.5 |  | Me (1 pers.) | PC, internet | Python (formula) | 0 € | Mon 26/10/2026 |
-| [ ] | 1.9 | Add a title for each notebook part and re-run top to bottom | 1.8 | 0.5 |  | Me (1 pers.) | PC, internet | Jupyter | 0 € | Mon 26/10/2026 |
-| [ ] | 1.10 | Commit and push; end-of-day notes in Notion | 1.9 | 0.25 |  | Me (1 pers.) | PC, internet | Git | 0 € | Mon 26/10/2026 |
-| [ ] | 1.11 | Buffer | - | 0.75 |  | Me (1 pers.) | - | - | - | Mon 26/10/2026 |
-| [ ] | 2.1 | Part 5a: write build_model(...) with 5 hyperparameters (layers, neurons, dropout, regularisation, learning rate) | 1.8 | 0.75 |  | Me (1 pers.) | PC, internet | Keras | 0 € | Tue 27/10/2026 |
-| [ ] | 2.2 | Part 5b: KerasTuner RandomSearch, 20 trials (disable tracking files if Windows errno 22 / tensorboard) | 2.1 | 1 |  | Me (1 pers.) | PC, internet | KerasTuner | 0 € | Tue 27/10/2026 |
-| [ ] | 2.3 | Part 6: Optuna with same 5 settings, same ranges, 20 trials, reuse build_model; compare both tools with noise margin | 2.1, 2.2 | 1.25 |  | Me (1 pers.) | PC, internet | Optuna | 0 € | Tue 27/10/2026 |
-| [ ] | 2.4 | Part 7a: retrain best settings on full train set, 5 seeds; compare with starting network and best simple model | 2.3 | 1 |  | Me (1 pers.) | PC, internet | Keras, scikit-learn | 0 € | Tue 27/10/2026 |
-| [ ] | 2.5 | Part 7b: measure on test set ONCE; honest conclusion | 2.4 | 0.5 |  | Me (1 pers.) | PC, internet | scikit-learn | 0 € | Tue 27/10/2026 |
-| [ ] | 2.6 | Part 8: save to model/ (.keras, TF-IDF joblib, metrics.json UTF-8, reference data sample) | 2.5 | 1 |  | Me (1 pers.) | PC, internet | joblib, json, model.save | 0 € | Tue 27/10/2026 |
-| [ ] | 2.7 | Restart kernel, run notebook top to bottom; push notebook + model/ | 2.6 | 0.5 |  | Me (1 pers.) | PC, internet | Jupyter, Git | 0 € | Tue 27/10/2026 |
+| [x] | 1.1 | Create GitHub repo, local folders (notebooks/, model/, src/, tests/), virtual env, .gitignore, first commit | - | 0.5 |  | Me (1 pers.) | PC, internet | Git, GitHub, VS Code | 0 € | Mon 26/10/2026 |
+| [x] | 1.2 | Install and pin libraries in requirements.txt (pandas, scikit-learn, tensorflow-cpu, keras-tuner, optuna, joblib, fastapi, uvicorn, pytest) | 1.1 | 0.5 |  | Me (1 pers.) | PC, internet | Python, pip, venv | 0 € | Mon 26/10/2026 |
+| [x] | 1.3 | Part 1: Audit and cleaning (load CSV, count rows and categories, text lengths, str.strip, drop_duplicates, one-sentence finding) | 1.2 | 1 |  | Me (1 pers.) | PC, internet | pandas | 0 € | Mon 26/10/2026 |
+| [x] | 1.4 | Part 2: Split with train_test_split + stratify: 60% train / 20% test / 20% production | 1.3 | 0.5 |  | Me (1 pers.) | PC, internet | scikit-learn | 0 € | Mon 26/10/2026 |
+| [x] | 1.5 | Part 3: TF-IDF fitted on train only, transform the 3 parts with the same object | 1.4 | 0.5 |  | Me (1 pers.) | PC, internet | TfidfVectorizer | 0 € | Mon 26/10/2026 |
+| [x] | 1.6 | Part 4a: Baselines - logistic regression + Naive Bayes, F1 on 5 seeds (validation from train) | 1.5 | 1 |  | Me (1 pers.) | PC, internet | scikit-learn, f1_score | 0 € | Mon 26/10/2026 |
+| [x] | 1.7 | Part 4b: Simple network (1 hidden layer, small dropout, EarlyStopping), F1 on 5 seeds | 1.5 | 1 |  | Me (1 pers.) | PC, internet | Keras, EarlyStopping | 0 € | Mon 26/10/2026 |
+| [x] | 1.8 | Compute noise margin 1.96*sqrt(p(1-p)/n) for each score | 1.6, 1.7 | 0.5 |  | Me (1 pers.) | PC, internet | Python (formula) | 0 € | Mon 26/10/2026 |
+| [x] | 1.9 | Add a title for each notebook part and re-run top to bottom | 1.8 | 0.5 |  | Me (1 pers.) | PC, internet | Jupyter | 0 € | Mon 26/10/2026 |
+| [x] | 1.10 | Commit and push; end-of-day notes in Notion | 1.9 | 0.25 |  | Me (1 pers.) | PC, internet | Git | 0 € | Mon 26/10/2026 |
+| [x] | 1.11 | Buffer | - | 0.75 |  | Me (1 pers.) | - | - | - | Mon 26/10/2026 |
+| [x] | 2.1 | Part 5a: write build_model(...) with 5 hyperparameters (layers, neurons, dropout, regularisation, learning rate) | 1.8 | 0.75 |  | Me (1 pers.) | PC, internet | Keras | 0 € | Tue 27/10/2026 |
+| [x] | 2.2 | Part 5b: KerasTuner RandomSearch, 20 trials (disable tracking files if Windows errno 22 / tensorboard) | 2.1 | 1 |  | Me (1 pers.) | PC, internet | KerasTuner | 0 € | Tue 27/10/2026 |
+| [x] | 2.3 | Part 6: Optuna with same 5 settings, same ranges, 20 trials, reuse build_model; compare both tools with noise margin | 2.1, 2.2 | 1.25 |  | Me (1 pers.) | PC, internet | Optuna | 0 € | Tue 27/10/2026 |
+| [x] | 2.4 | Part 7a: retrain best settings on full train set, 5 seeds; compare with starting network and best simple model | 2.3 | 1 |  | Me (1 pers.) | PC, internet | Keras, scikit-learn | 0 € | Tue 27/10/2026 |
+| [x] | 2.5 | Part 7b: measure on test set ONCE; honest conclusion | 2.4 | 0.5 |  | Me (1 pers.) | PC, internet | scikit-learn | 0 € | Tue 27/10/2026 |
+| [x] | 2.6 | Part 8: save to model/ (.keras, TF-IDF joblib, metrics.json UTF-8, reference data sample) | 2.5 | 1 |  | Me (1 pers.) | PC, internet | joblib, json, model.save | 0 € | Tue 27/10/2026 |
+| [x] | 2.7 | Restart kernel, run notebook top to bottom; push notebook + model/ | 2.6 | 0.5 |  | Me (1 pers.) | PC, internet | Jupyter, Git | 0 € | Tue 27/10/2026 |
 | [ ] | 2.8 | Buffer (KerasTuner/Windows issues are common) | - | 1 |  | Me (1 pers.) | - | - | - | Tue 27/10/2026 |
 | [ ] | 3.1 | A1: FastAPI app, model loaded once at startup, /health and /predict, pydantic validation, clear errors | 2.7 | 1.5 |  | Me (1 pers.) | PC, internet | FastAPI, pydantic, uvicorn | 0 € | Wed 28/10/2026 |
 | [ ] | 3.2 | A2: run with uvicorn, open /docs, test 3 cases (valid, invalid, very short) | 3.1 | 0.5 |  | Me (1 pers.) | PC, internet | uvicorn, /docs | 0 € | Wed 28/10/2026 |
