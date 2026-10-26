@@ -3,10 +3,14 @@
 # min_f1: observed test F1 minus the noise margin (both are in notebook/model/metrics.json),
 #         rounded down, so that normal random variation does not reject a good model.
 #         Replace 0.80 with YOUR value (see the README/answer for the one-line command).
-min_f1: 0.99
+min_f1: 0.81
 
 # min_test_size: with fewer test texts the noise margin becomes too wide to trust the F1.
 min_test_size: 300
 
 # Used only by tests/test_api.py (smoke test of the API on the reference sample).
 min_reference_accuracy: 0.85
+
+
+#“I set the minimum F1 to 0.81, which is my test F1 (0.849) minus the noise margin (0.032), rounded down: \
+#a model below it is worse than mine by more than random noise, while a normal retraining is not rejected by chance.”
