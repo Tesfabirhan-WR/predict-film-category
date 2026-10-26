@@ -1,2 +1,11 @@
+# API runtime dependencies.
+# IMPORTANT: pin the same versions as the notebook (see "library_versions" in notebook/model/metrics.json),
+# otherwise the saved .keras model and tfidf.joblib may not load.
 fastapi
 uvicorn
+pydantic
+tensorflow-cpu
+scikit-learn
+numpy
+spacy
+joblib

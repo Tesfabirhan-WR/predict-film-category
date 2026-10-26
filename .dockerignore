@@ -1,0 +1,31 @@
+# Version control and CI
+.git
+.github
+.gitignore
+
+# Environments and caches
+venv
+.venv
+env
+__pycache__
+*.pyc
+.pytest_cache
+.ipynb_checkpoints
+
+# Notebook work: keep only the trained model folder
+notebook/*
+!notebook/model
+*.ipynb
+
+# Data, tests, docs, config not needed at runtime
+data
+tests
+docs
+*.md
+.env
+my_log_dir
+kt_logs
+
+# Docker files themselves
+Dockerfile
+.dockerignore
