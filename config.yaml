@@ -14,3 +14,10 @@ min_reference_accuracy: 0.85
 
 #“I set the minimum F1 to 0.81, which is my test F1 (0.849) minus the noise margin (0.032), rounded down: \
 #a model below it is worse than mine by more than random noise, while a normal retraining is not rejected by chance.”
+
+#python check_quality.py --metrics tests/fake_model/metrics.json QUALITY GATE FAILED
+ #- test F1 0.310 is below the minimum 0.810
+
+ #ython check_quality.py --metrics tests/fake_model/metrics.json; echo "exit code: $?" QUALITY GATE FAILED
+ #- test F1 0.310 is below the minimum 0.810
+#exit code: 1
