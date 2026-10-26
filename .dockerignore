@@ -13,9 +13,12 @@ __pycache__
 .ipynb_checkpoints
 
 # Notebook work: keep only the trained model folder
-notebook/*
-!notebook/model
+notebook
 *.ipynb
+resources
+tools
+structure.txt
+model/*.png
 
 # Data, tests, docs, config not needed at runtime
 data

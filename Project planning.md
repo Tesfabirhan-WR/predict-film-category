@@ -93,28 +93,28 @@ Project objective: take a horror/comedy film classifier from a notebook to a pub
 
 **Total:** 6.0 h | **Date:** (to fill)
 
-- [ ]  **3.1** A1: FastAPI app, model loaded once at startup, /health and /predict, pydantic validation, clear errors
+- [x]  **3.1** A1: FastAPI app, model loaded once at startup, /health and /predict, pydantic validation, clear errors
     - Project: P2 · API + tests + quality gate | Priority: High | Estimate: 1.5 h | Status: Not started
     - Done when: App starts without error
-- [ ]  **3.2** A2: run with uvicorn, open /docs, test 3 cases (valid, invalid, very short)
+- [x]  **3.2** A2: run with uvicorn, open /docs, test 3 cases (valid, invalid, very short)
     - Project: P2 · API + tests + quality gate | Priority: High | Estimate: 0.5 h | Status: Not started
     - Done when: Screenshots: class for valid case, clear errors for the 2 others
-- [ ]  **3.3** A3: pytest tests (API responds, valid works, invalid refused, model min score) + pytest.ini pythonpath
+- [x]  **3.3** A3: pytest tests (API responds, valid works, invalid refused, model min score) + pytest.ini pythonpath
     - Project: P2 · API + tests + quality gate | Priority: High | Estimate: 1 h | Status: Not started
     - Done when: All tests green (screenshot)
-- [ ]  **3.4** A4: config.yaml (min F1, min test size) + check_quality.py; justify threshold with noise margin
+- [x]  **3.4** A4: config.yaml (min F1, min test size) + check_quality.py; justify threshold with noise margin
     - Project: P2 · API + tests + quality gate | Priority: High | Estimate: 0.75 h | Status: Not started
     - Done when: Real model accepted, fake model rejected, one-sentence justification
-- [ ]  **3.5** B5: Dockerfile (slim base, tensorflow-cpu, pinned versions) + .dockerignore; docker build; note image size
+- [x]  **3.5** B5: Dockerfile (slim base, tensorflow-cpu, pinned versions) + .dockerignore; docker build; note image size
     - Project: P3 · Docker container | Priority: High | Estimate: 1 h | Status: Not started
     - Done when: Image built, size noted
-- [ ]  **3.6** B6: docker run and redo the 3 tests of A2
+- [x]  **3.6** B6: docker run and redo the 3 tests of A2
     - Project: P3 · Docker container | Priority: High | Estimate: 0.5 h | Status: Not started
     - Done when: Same answers as local (screenshot)
-- [ ]  **3.7** Commit and push; end-of-day notes
+- [x]  **3.7** Commit and push; end-of-day notes
     - Project: P2 · API + tests + quality gate | Priority: Low | Estimate: 0.25 h | Status: Not started
     - Done when: Push done
-- [ ]  **3.8** Buffer
+- [x]  **3.8** Buffer
     - Project: Buffer | Priority: Low | Estimate: 0.5 h | Status: Not started
 
 ## 📅 Day 4
@@ -183,8 +183,8 @@ Project objective: take a horror/comedy film classifier from a notebook to a pub
 ## 📦 Deliverables checklist
 
 - [ ]  GitHub repo: notebook, model/, API, tests, thresholds file, quality-gate script, dependency files, Dockerfile, .dockerignore, workflow, README.md
-- [ ]  Proof: tests in local
-- [ ]  Proof: container in local
+- [x]  Proof: tests in local
+- [x]  Proof: container in local
 - [ ]  Proof: green chain
 - [ ]  Proof: red chain (impossible threshold)
 - [ ]  Proof: public URL

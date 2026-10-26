@@ -1,0 +1,5 @@
+# Tools to run the tests and the quality gate (not needed in the Docker image)
+-r requirements-api.txt
+pytest
+httpx
+pyyaml
