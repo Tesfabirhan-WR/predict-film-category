@@ -3,7 +3,7 @@
 # min_f1: observed test F1 minus the noise margin (both are in notebook/model/metrics.json),
 #         rounded down, so that normal random variation does not reject a good model.
 #         Replace 0.80 with YOUR value (see the README/answer for the one-line command).
-min_f1: 0.80
+min_f1: 0.99
 
 # min_test_size: with fewer test texts the noise margin becomes too wide to trust the F1.
 min_test_size: 300
