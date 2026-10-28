@@ -39,50 +39,50 @@ Film classifier (horror / comedy): from a notebook to a public API on Azure.
 | ✅ | 2.5 | Part 7b: measure on test set ONCE; honest conclusion | 2.4 | 0.5 |  | Me | PC | scikit-learn | 0 € | 23/10/2026 |
 | ✅ | 2.6 | Part 8: save to model/ (.keras, TF-IDF joblib, metrics.json UTF-8, reference data sample) | 2.5 | 1 |  | Me | PC | joblib, json, model.save | 0 € | 23/10/2026 |
 | ✅ | 2.7 | Restart kernel, run notebook top to bottom; push notebook + model/ | 2.6 | 0.5 |  | Me | PC | Jupyter, Git | 0 € | 23/10/2026 |
-| ⬜ | 2.8 | Buffer (KerasTuner/Windows issues are common) | - | 1 |  | Me | - | - | - | 23/10/2026 |
-|  |  | **Day 2 total** |  | **7** |  |  |  |  |  |  |
+| ✅ | 2.8 | Buffer (KerasTuner/Windows issues are common) | - | 1 |  | Me | - | - | - | 23/10/2026 |
+| |  | **Day 2 total** |  | **7** |  |  |  |  |  |  |
 
 ### Day 3: API, tests, quality gate, Docker (Mon 26/10/2026)
 
 | Fait | ID | Tâche | Dépend de | Charge estimée (h) | Charge réelle (h) | Ress. humaines | Ress. matérielles | Ress. techniques | Ress. financières | Date prévue |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ⬜ | 3.1 | A1: FastAPI app, model loaded once at startup, /health and /predict, pydantic validation, clear errors | 2.7 | 1.5 |  | Me | PC | FastAPI, pydantic, uvicorn | 0 € | 26/10/2026 |
-| ⬜ | 3.2 | A2: run with uvicorn, open /docs, test 3 cases (valid, invalid, very short) | 3.1 | 0.5 |  | Me | PC | uvicorn, /docs | 0 € | 26/10/2026 |
-| ⬜ | 3.3 | A3: pytest tests (API responds, valid works, invalid refused, model min score) + pytest.ini pythonpath | 3.2 | 1 |  | Me | PC | pytest, TestClient | 0 € | 26/10/2026 |
-| ⬜ | 3.4 | A4: config.yaml (min F1, min test size) + check_quality.py; justify threshold with noise margin | 2.7, 3.3 | 0.75 |  | Me | PC | YAML, Python | 0 € | 26/10/2026 |
-| ⬜ | 3.5 | B5: Dockerfile (slim base, tensorflow-cpu, pinned versions) + .dockerignore; docker build; note image size | 3.3 | 1 |  | Me | PC, Docker Engine | Docker | 0 € | 26/10/2026 |
-| ⬜ | 3.6 | B6: docker run and redo the 3 tests of A2 | 3.5 | 0.5 |  | Me | PC, Docker Engine | Docker | 0 € | 26/10/2026 |
-| ⬜ | 3.7 | Commit and push; end-of-day notes | 3.4, 3.6 | 0.25 |  | Me | PC | Git | 0 € | 26/10/2026 |
-| ⬜ | 3.8 | Buffer | - | 0.5 |  | Me | - | - | - | 26/10/2026 |
+| ✅ | 3.1 | A1: FastAPI app, model loaded once at startup, /health and /predict, pydantic validation, clear errors | 2.7 | 1.5 |  | Me | PC | FastAPI, pydantic, uvicorn | 0 € | 26/10/2026 |
+| ✅ | 3.2 | A2: run with uvicorn, open /docs, test 3 cases (valid, invalid, very short) | 3.1 | 0.5 |  | Me | PC | uvicorn, /docs | 0 € | 26/10/2026 |
+| ✅ | 3.3 | A3: pytest tests (API responds, valid works, invalid refused, model min score) + pytest.ini pythonpath | 3.2 | 1 |  | Me | PC | pytest, TestClient | 0 € | 26/10/2026 |
+| ✅ | 3.4 | A4: config.yaml (min F1, min test size) + check_quality.py; justify threshold with noise margin | 2.7, 3.3 | 0.75 |  | Me | PC | YAML, Python | 0 € | 26/10/2026 |
+| ✅ | 3.5 | B5: Dockerfile (slim base, tensorflow-cpu, pinned versions) + .dockerignore; docker build; note image size | 3.3 | 1 |  | Me | PC, Docker Engine | Docker | 0 € | 26/10/2026 |
+| ✅ | 3.6 | B6: docker run and redo the 3 tests of A2 | 3.5 | 0.5 |  | Me | PC, Docker Engine | Docker | 0 € | 26/10/2026 |
+| ✅ | 3.7 | Commit and push; end-of-day notes | 3.4, 3.6 | 0.25 |  | Me | PC | Git | 0 € | 26/10/2026 |
+| ✅ | 3.8 | Buffer | - | 0.5 |  | Me | - | - | - | 26/10/2026 |
 |  |  | **Day 3 total** |  | **6** |  |  |  |  |  |  |
 
 ### Day 4: GitHub Actions + Azure (Tue 27/10/2026)
 
 | Fait | ID | Tâche | Dépend de | Charge estimée (h) | Charge réelle (h) | Ress. humaines | Ress. matérielles | Ress. techniques | Ress. financières | Date prévue |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ⬜ | 4.1 | C7: workflow in .github/workflows/ - job test (install, quality gate, pytest) then job image (needs: test; build + check API starts) | 3.4, 3.5 | 1.25 |  | Me | PC, Docker Engine | GitHub Actions | 0 € | 27/10/2026 |
-| ⬜ | 4.2 | C8: raise threshold above reachable, push (test red, image not started); restore threshold, all green | 4.1 | 0.5 |  | Me | PC, Docker Engine | GitHub Actions | 0 € | 27/10/2026 |
-| ⬜ | 4.3 | D9: create Azure Container Registry (Basic, unique lowercase name, no dashes); enable admin user | 3.7 | 0.5 |  | Me | PC, Azure | Azure portal, ACR | ~0.17 $/day | 27/10/2026 |
-| ⬜ | 4.4 | D10a: store the 3 values as GitHub secrets (never in code or chat) | 4.3 | 0.25 |  | Me | PC | GitHub secrets | 0 € | 27/10/2026 |
-| ⬜ | 4.5 | D10b: add job publier (needs: image), docker/login-action, push image tagged with github.sha | 4.1, 4.4 | 1 |  | Me | PC, Docker Engine | GitHub Actions, docker/login-action | included | 27/10/2026 |
-| ⬜ | 4.6 | D11: create Container App from the image (secret auth, 1 CPU, 2 GB, external ingress, target port) | 4.5 | 1 |  | Me | PC, Azure | Azure Container Apps, az CLI | 0 to 1 $ | 27/10/2026 |
-| ⬜ | 4.7 | D12: test /health and /predict (3 cases) on public URL; show the trainer | 4.6 | 0.5 |  | Me | PC, Azure | Browser | 0 to 1 $ | 27/10/2026 |
-| ⬜ | 4.8 | Buffer (permissions, MANIFEST_UNKNOWN, restart loops) | - | 1 |  | Me | - | - | - | 27/10/2026 |
+| ✅ | 4.1 | C7: workflow in .github/workflows/ - job test (install, quality gate, pytest) then job image (needs: test; build + check API starts) | 3.4, 3.5 | 1.25 |  | Me | PC, Docker Engine | GitHub Actions | 0 € | 27/10/2026 |
+| ✅ | 4.2 | C8: raise threshold above reachable, push (test red, image not started); restore threshold, all green | 4.1 | 0.5 |  | Me | PC, Docker Engine | GitHub Actions | 0 € | 27/10/2026 |
+| ✅ | 4.3 | D9: create Azure Container Registry (Basic, unique lowercase name, no dashes); enable admin user | 3.7 | 0.5 |  | Me | PC, Azure | Azure portal, ACR | ~0.17 $/day | 27/10/2026 |
+| ✅ | 4.4 | D10a: store the 3 values as GitHub secrets (never in code or chat) | 4.3 | 0.25 |  | Me | PC | GitHub secrets | 0 € | 27/10/2026 |
+| ✅ | 4.5 | D10b: add job publier (needs: image), docker/login-action, push image tagged with github.sha | 4.1, 4.4 | 1 |  | Me | PC, Docker Engine | GitHub Actions, docker/login-action | included | 27/10/2026 |
+| ✅ | 4.6 | D11: create Container App from the image (secret auth, 1 CPU, 2 GB, external ingress, target port) | 4.5 | 1 |  | Me | PC, Azure | Azure Container Apps, az CLI | 0 to 1 $ | 27/10/2026 |
+| ✅ | 4.7 | D12: test /health and /predict (3 cases) on public URL; show the trainer | 4.6 | 0.5 |  | Me | PC, Azure | Browser | 0 to 1 $ | 27/10/2026 |
+| ✅ | 4.8 | Buffer (permissions, MANIFEST_UNKNOWN, restart loops) | - | 1 |  | Me | - | - | - | 27/10/2026 |
 |  |  | **Day 4 total** |  | **6** |  |  |  |  |  |  |
 
 ### Day 5: Release, rollback, cleanup, deliverables (Wed 28/10/2026)
 
 | Fait | ID | Tâche | Dépend de | Charge estimée (h) | Charge réelle (h) | Ress. humaines | Ress. matérielles | Ress. techniques | Ress. financières | Date prévue |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| ⬜ | 5.1 | E13: add /hello route, push, 3 green jobs, deploy new image by hand (az containerapp update) with commit id | 4.7 | 1 |  | Me | PC, Azure | az CLI, git rev-parse | 0 to 1 $ | 28/10/2026 |
-| ⬜ | 5.2 | E14: rollback - redeploy the previous commit | 5.1 | 0.5 |  | Me | PC, Azure | az CLI | 0 to 1 $ | 28/10/2026 |
-| ⬜ | 5.3 | F15a: note estimated cost of what was created | 5.2 | 0.25 |  | Me | PC, Azure | Azure Cost Management | 0 € | 28/10/2026 |
-| ⬜ | 5.4 | F15b: delete Container App, its environment and the registry (never the shared resource group) | 5.3 | 0.5 |  | Me | PC, Azure | Azure portal / az CLI | stops costs | 28/10/2026 |
-| ⬜ | 5.5 | Write README.md (how to run notebook, API, tests, quality gate, Docker, workflow) | 4.7 | 1 |  | Me | PC | Markdown | 0 € | 28/10/2026 |
-| ⬜ | 5.6 | Write the one-page sheet in your own words (model journey, threshold, manual deploy, automation needs, limits) | 5.4 | 1 |  | Me | PC | Notion / Word | 0 € | 28/10/2026 |
-| ⬜ | 5.7 | Gather all proofs | 5.4 | 0.5 |  | Me | PC | Screenshots | 0 € | 28/10/2026 |
-| ⬜ | 5.8 | Final check of repo against deliverables; push | 5.5, 5.6, 5.7 | 0.5 |  | Me | PC | Git, GitHub | 0 € | 28/10/2026 |
-| ⬜ | 5.9 | Buffer | - | 1 |  | Me | - | - | - | 28/10/2026 |
+| ✅ | 5.1 | E13: add /hello route, push, 3 green jobs, deploy new image by hand (az containerapp update) with commit id | 4.7 | 1 |  | Me | PC, Azure | az CLI, git rev-parse | 0 to 1 $ | 28/10/2026 |
+| ✅ | 5.2 | E14: rollback - redeploy the previous commit | 5.1 | 0.5 |  | Me | PC, Azure | az CLI | 0 to 1 $ | 28/10/2026 |
+| ✅ | 5.3 | F15a: note estimated cost of what was created | 5.2 | 0.25 |  | Me | PC, Azure | Azure Cost Management | 0 € | 28/10/2026 |
+| ✅ | 5.4 | F15b: delete Container App, its environment and the registry (never the shared resource group) | 5.3 | 0.5 |  | Me | PC, Azure | Azure portal / az CLI | stops costs | 28/10/2026 |
+| ✅ | 5.5 | Write README.md (how to run notebook, API, tests, quality gate, Docker, workflow) | 4.7 | 1 |  | Me | PC | Markdown | 0 € | 28/10/2026 |
+| ✅ | 5.6 | Write the one-page sheet in your own words (model journey, threshold, manual deploy, automation needs, limits) | 5.4 | 1 |  | Me | PC | Notion / Word | 0 € | 28/10/2026 |
+| ✅ | 5.7 | Gather all proofs | 5.4 | 0.5 |  | Me | PC | Screenshots | 0 € | 28/10/2026 |
+| ✅ | 5.8 | Final check of repo against deliverables; push | 5.5, 5.6, 5.7 | 0.5 |  | Me | PC | Git, GitHub | 0 € | 28/10/2026 |
+| ✅ | 5.9 | Buffer | - | 1 |  | Me | - | - | - | 28/10/2026 |
 |  |  | **Day 5 total** |  | **6.25** |  |  |  |  |  |  |
 
 ## 2. Totals per day
