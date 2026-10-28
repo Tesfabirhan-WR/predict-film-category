@@ -155,8 +155,8 @@ Une ligne par déploiement ou retour en arrière. Ne jamais supprimer une ligne 
 
 | Version | Date | Commit (court) | Modèle | F1 test | Changement | Contrôles (`/health`, `/predict`) | Action | Responsable |
 |---|---|---|---|---|---|---|---|---|
-| 1.0.0 | `28/10/2026` | `<sha>` | 1.0.0 | `<0.xx>` | Première mise en ligne : API `/health` et `/predict`, modèle du notebook | `<OK / KO>` | Déploiement | `<nom>` |
-| 1.1.0 | `<jj/mm/aaaa>` | `<sha>` | 1.0.0 | `<0.xx>` | Ajout de la route `/hello` (exercice de mise à jour) | `<OK / KO>` | Déploiement | `<nom>` |
+| 1.0.0 | `27/10/2026` | `<sha>` | 1.0.0 | `0.848 ± 0.032` | Première mise en ligne : API `/health` et `/predict`, modèle du notebook | `<OK / KO>` | Déploiement | `<nom>` |
+| 2.0.0 | `<28/10/2026>` | `<sha>` | 1.0.0 | `0.848 ± 0.032` | Ajout de la route `/hello` (exercice de mise à jour) | `<OK / KO>` | Déploiement | `<nom>` |
 | 1.0.0 | `<jj/mm/aaaa>` | `<sha de la 1.0.0>` | 1.0.0 | `<0.xx>` | Retour en arrière : `/hello` retirée | `<OK / KO>` | Retour en arrière | `<nom>` |
 | | | | | | | | | |
 

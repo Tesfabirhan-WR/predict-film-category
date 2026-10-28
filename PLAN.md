@@ -138,6 +138,6 @@ Tips: set an Azure budget alert at 5 $ (Cost Management, Budgets); note the esti
 
 ## 7. Deliverables checklist
 
-- [ ] GitHub repo: notebook, model/, API, tests, thresholds file, quality-gate script, dependency files, Dockerfile, .dockerignore, workflow, README.md
-- [ ] Proofs: local tests, local container, green chain, red chain, public URL, /health with commit, /hello added then removed, resources deleted
-- [ ] One-page sheet in your own words
+- [x] GitHub repo: notebook, model/, API, tests, thresholds file, quality-gate script, dependency files, Dockerfile, .dockerignore, workflow, README.md
+- [x] Proofs: local tests, local container, green chain, red chain, public URL, /health with commit, /hello added then removed, resources deleted
+- [x] One-page sheet in your own words

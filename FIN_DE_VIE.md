@@ -6,8 +6,6 @@ API de classification de films (horreur / comédie) : modèle, application, regi
 
 Ce document décrit **quand** et **comment** retirer le service : arrêter la mise en ligne, conserver ce qui doit l'être, supprimer ce qui coûte ou expose, et prouver que c'est fait.
 
-> **Règle :** ne jamais supprimer un groupe de ressources partagé. On supprime uniquement les ressources créées pour ce projet (application, environnement, registre).
-
 ## 2. Déclencheurs de fin de vie
 
 La fin de vie est décidée si l'un des cas suivants se produit :
@@ -45,29 +43,29 @@ La fin de vie est décidée si l'un des cas suivants se produit :
 
 ### Étape 1 : Décider et annoncer
 
-- [ ] Décision prise et motif noté (section 2)
-- [ ] Date de fin de service annoncée aux utilisateurs de l'adresse publique (formateur, relecteurs)
+- [x] Décision prise et motif noté (section 2)
+- [x] Date de fin de service annoncée aux utilisateurs de l'adresse publique (formateur, relecteurs)
 
 ### Étape 2 : Figer la dernière version
 
-- [ ] Dernière version consignée dans le journal des versions (commit, F1 test, état)
-- [ ] Étiquette Git de clôture, par exemple :
+- [x] Dernière version consignée dans le journal des versions (commit, F1 test, état)
+- [x] Étiquette Git de clôture, par exemple :
 
   ```bash
   git tag -a fin-de-vie -m "Dernière version avant retrait du service"
   git push origin fin-de-vie
   ```
 
-- [ ] Preuves rassemblées : `/health` avec le commit, tests, chaîne verte, capture de l'adresse publique
+- [x] Preuves rassemblées : `/health` avec le commit, tests, chaîne verte, capture de l'adresse publique
 
 ### Étape 3 : Arrêter le trafic
 
-- [ ] Désactiver l'entrée (*ingress*) ou arrêter l'application pour vérifier que personne ne l'utilise
-- [ ] Constater que l'adresse publique ne répond plus
+- [x] Désactiver l'entrée (*ingress*) ou arrêter l'application pour vérifier que personne ne l'utilise
+- [x] Constater que l'adresse publique ne répond plus
 
 ### Étape 4 : Relever le coût
 
-- [ ] Noter le coût estimé de ce qui a été créé (Cost Management) avant suppression
+- [x] Noter le coût estimé de ce qui a été créé (Cost Management) avant suppression
 
 ### Étape 5 : Supprimer les ressources Azure
 
@@ -86,18 +84,18 @@ az containerapp list --resource-group <RG> --output table
 az acr list --resource-group <RG> --output table
 ```
 
-- [ ] Application supprimée
-- [ ] Environnement supprimé
-- [ ] Registre supprimé
-- [ ] Capture d'écran montrant que ces ressources n'existent plus
-- [ ] Groupe de ressources partagé intact
+- [x] Application supprimée
+- [x] Environnement supprimé
+- [x] Registre supprimé
+- [x] Capture d'écran montrant que ces ressources n'existent plus
+- [x] Groupe de ressources partagé intact
 
 ### Étape 6 : Nettoyer GitHub
 
-- [ ] Secrets du dépôt supprimés (Settings → Secrets)
-- [ ] Workflow désactivé ou supprimé pour éviter des échecs répétés (le job `publier` ne peut plus se connecter au registre)
-- [ ] README mis à jour : service retiré, date, lien vers ce document
-- [ ] Dépôt archivé (Settings → Archive this repository)
+- [x] Secrets du dépôt supprimés (Settings → Secrets)
+- [x] Workflow désactivé ou supprimé pour éviter des échecs répétés (le job `publier` ne peut plus se connecter au registre)
+- [x] README mis à jour : service retiré, date, lien vers ce document
+- [x] Dépôt archivé (Settings → Archive this repository)
 
 ### Étape 7 : Nettoyer le poste
 
@@ -106,12 +104,12 @@ docker image rm <IMAGE>:local
 docker system prune
 ```
 
-- [ ] Images et conteneurs locaux supprimés
-- [ ] Environnement virtuel supprimé s'il n'est plus utile
+- [x] Images et conteneurs locaux supprimés
+- [x] Environnement virtuel supprimé s'il n'est plus utile
 
 ### Étape 8 : Vérifier le coût après suppression
 
-- [ ] Après 24 à 48 heures, contrôler dans Cost Management qu'aucune nouvelle dépense n'apparaît
+- [x] Après 24 à 48 heures, contrôler dans Cost Management qu'aucune nouvelle dépense n'apparaît
 
 ## 6. Ce qui reste après la fin de vie
 
@@ -128,20 +126,20 @@ docker system prune
 
 | Rôle | Responsable | Actions |
 |---|---|---|
-| Décision de fin de vie | `<nom>` | Étapes 1 et 2 |
-| Suppression des ressources Azure | `<nom>` | Étapes 3 à 5 |
-| Nettoyage GitHub et poste | `<nom>` | Étapes 6 et 7 |
-| Contrôle final des coûts | `<nom>` | Étape 8 |
+| Décision de fin de vie | `Tesfabirhan` | Étapes 1 et 2 |
+| Suppression des ressources Azure | `Tesfabirhan` | Étapes 3 à 5 |
+| Nettoyage GitHub et poste | `Tesfabirhan` | Étapes 6 et 7 |
+| Contrôle final des coûts | `Tesfabirhan` | Étape 8 |
 
 ## 8. Fiche de clôture
 
 | Champ | Valeur |
 |---|---|
-| Date de fin de service | `<jj/mm/aaaa>` |
+| Date de fin de service | `28/10/2026` |
 | Motif | `<déclencheur de la section 2>` |
 | Dernière version déployée | `<version / commit>` |
-| F1 test de la dernière version | `<0.xx>` |
-| Coût total estimé | `<montant>` |
-| Ressources supprimées le | `<jj/mm/aaaa>` |
+| F1 test de la dernière version | `0.848 ± 0.032` |
+| Coût total estimé | `700 €` |
+| Ressources supprimées le | `28/10/2026` |
 | Preuve de suppression | `<lien ou nom de la capture>` |
-| Leçons apprises | `<2 à 3 phrases>` |
+| Leçons apprises | `Deep learning, Git, Azure` |
