@@ -5,7 +5,7 @@
 <h1 align="center">Predict Film Category</h1>
 
 <p align="center">
-  <img src="resources/app_page.png" alt="Pipeline diagram" width="900">
+  <img src="resources/final_api.png" alt="Home page of the Film Category API" width="900">
 </p>
 
 <p align="center">
@@ -75,15 +75,20 @@ predict-film-category/
 ├── data/                          # source dataset (film summaries)
 ├── model/                         # model.keras, tfidf.joblib, metrics.json, reference_sample.csv
 ├── notebook/                      # predFilm.ipynb (8 stages) and TensorBoard logs
-├── resources/                     # diagrams, screenshots and briefs
+├── resources/                     # logo, diagrams, screenshots and briefs
 ├── src/
 │   ├── app.py                     # FastAPI application
-│   └── static/                    # logo and favicon served by the API
+│   └── static/                    # served by the API at /static
+│       ├── logo.png               # logo (256x256)
+│       ├── favicon.ico            # browser tab icon
+│       └── training_curves.png    # loss and accuracy of the final model
 ├── tests/
 │   ├── conftest.py
 │   ├── test_api.py                # 9 automatic tests
 │   └── fake_model/metrics.json    # invented bad model (the gate must refuse it)
-├── tools/tree.py                  # prints the project tree
+├── tools/
+│   ├── tree.py                    # prints the project tree
+│   └── export_training_curves.py  # TensorBoard logs -> src/static/training_curves.png
 ├── check_quality.py               # quality gate
 ├── config.yaml                    # quality thresholds
 ├── Dockerfile
@@ -153,6 +158,24 @@ Files produced in `model/`:
   <img src="resources/tensorboard.png" alt="TensorBoard dashboard" width="800">
 </p>
 
+### Export the training curves
+
+The home page of the API shows the learning curves of the final model. The script reads the TensorBoard logs and saves them as a picture:
+
+```bash
+pip install matplotlib                                    # needed only for this script
+python tools/export_training_curves.py notebook/my_log_dir/<session-folder>
+python tools/export_training_curves.py notebook/my_log_dir/<session-folder> --list   # shows which curves the logs contain
+```
+
+- `<session-folder>` is the date-time folder created by a notebook run (for example `20261028-110802`). The `final_model` folder inside it is accepted too.
+- The picture is saved as `src/static/training_curves.png`. Commit it: it is copied into the Docker image with `src/`.
+- Run the script again after each retraining, then rebuild and redeploy to show the new curves online.
+
+<p align="center">
+  <img src="src/static/training_curves.png" alt="Loss and accuracy of the final model" width="800">
+</p>
+
 ### Cleaning step shared with the API
 
 The TF-IDF was fitted on cleaned text, so the API applies the **same** cleaning (`clean_doc` in `src/app.py`) before predicting.
@@ -172,11 +195,12 @@ If your model folder is elsewhere, set `MODEL_DIR` (default: `model/` at the pro
 
 | Route | Method | Description |
 |---|---|---|
-| `/` | GET | home page with the logo |
+| `/` | GET | home page with the logo and the training curves |
 | `/health` | GET | status, model version and commit ID |
 | `/predict` | POST | category, probability and version for a film summary |
 | `/docs` | GET | interactive test page (Swagger) |
 | `/redoc` | GET | documentation |
+| `/static/...` | GET | logo, favicon and training curves |
 
 **Valid request** (an English summary of 20 to 5000 characters):
 
@@ -205,6 +229,21 @@ curl -X POST http://127.0.0.1:8000/predict -H "Content-Type: application/json" -
 <p align="center">
   <img src="resources/api_film.png" alt="The API test page" width="800">
 </p>
+
+### Logo and static files
+
+The API serves the files of `src/static/` at `/static`:
+
+| File | Used for |
+|---|---|
+| `logo.png` | the home page, the test page `/docs`, the documentation `/redoc` and this README |
+| `favicon.ico` | the icon of the browser tab (`/favicon.ico`, also used by `/docs`) |
+| `training_curves.png` | the learning curves shown on the home page |
+
+To change the logo, save a square PNG (256x256 is enough, keep it under about 100 KB) as `src/static/logo.png`, and an icon as `src/static/favicon.ico`.
+A large image slows the page down and makes the Docker image heavier.
+
+Keep these files inside `src/` and commit them: the Dockerfile copies only `src/` and `model/`, and `resources/` is not part of the image.
 
 ---
 
@@ -248,7 +287,7 @@ docker images film-api                       # note the image size
 Then repeat the three cases on http://localhost:8000/docs: a valid text, an invalid text, a very short text.
 
 - Base image `python:3.11-slim` with `tensorflow-cpu` and pinned versions.
-- Only `src/` and `model/` are copied; notebooks, data, tests and logs are excluded by `.dockerignore`.
+- Only `src/` (the code and the `static/` files) and `model/` are copied; notebooks, data, tests, resources and logs are excluded by `.dockerignore`.
 - The commit ID is passed with `GIT_COMMIT` and returned by `/health`.
 - The container runs as a normal user and has a health check.
 
@@ -282,6 +321,15 @@ Passwords are never written in the code, in files or in a chat.
 
 On the training account the role is *Contributor*: the robot can build the image and store it in the registry, but cannot order Azure to put it online.
 So the deployment is done **by hand**, with the commit ID of the version to put online.
+
+**Where to run what:**
+
+| Command | Where |
+|---|---|
+| `git`, `docker` (build, run, push) | your own terminal (WSL), inside the project folder |
+| `az` (registry, Container App) | Azure Cloud Shell or your own terminal after `az login` |
+
+Azure Cloud Shell has no copy of the repository and no Docker engine: `git rev-parse` and `docker build` fail there.
 
 ### Registry
 
@@ -319,14 +367,79 @@ Open `https://<address>/docs` or `/health`. For this project the public address 
 
 ### Release a new version, and roll back
 
+**Step 1: set the resource group.** Shell variables are lost when you open a new terminal or reconnect Cloud Shell.
+An empty `$RG` turns `--resource-group $RG` into `--resource-group` with no value, and Azure answers `expected one argument`.
+
 ```bash
-git rev-parse HEAD                           # commit ID of the version to deploy (after 3 green jobs)
-az containerapp update --name film-api --resource-group <resource-group> \
+echo "RG=[$RG]"                      # RG=[] means the variable is empty
+az account show                      # not logged in? run: az login --use-device-code
+az containerapp list --query "[].{name:name, resourceGroup:resourceGroup}" --output table
+RG=<your-resource-group-name>        # the exact name shown in the table
+```
+
+**Step 2: check that the image tag exists in the registry.**
+
+```bash
+az acr repository show-tags --name <registry> --repository film-api --orderby time_desc --output table
+```
+
+- The tag is listed: go to step 4.
+- The tag is missing: the update would fail with `MANIFEST_UNKNOWN`. Go to step 3.
+
+**Step 3: get the final image into the registry** (only if the tag is missing).
+
+- **A. Let the robot do it (recommended).** After a push to `main` with three green jobs, the `publier` job pushes the image tagged with the full commit ID.
+  Use that commit ID as the tag in step 4. `/health` will then show it.
+
+  ```bash
+  git rev-parse HEAD                 # run in the project folder, not in Cloud Shell
+  ```
+
+- **B. Push a tag by hand** from your own terminal, with the Docker engine running (`sudo service docker start`):
+
+  ```bash
+  docker build -t film-api:v2 --build-arg GIT_COMMIT=$(git rev-parse HEAD) .
+  docker login <registry>.azurecr.io --username <user>
+  docker tag film-api:v2 <registry>.azurecr.io/film-api:v2
+  docker push <registry>.azurecr.io/film-api:v2
+  ```
+
+  If the push breaks halfway, retry it: finished layers are skipped. Without `--build-arg GIT_COMMIT`, `/health` shows `commit: unknown`.
+
+**Step 4: update the app.** This version stops with a clear message if the variable is empty:
+
+```bash
+az containerapp update --name film-api --resource-group "${RG:?RG is empty, set it first}" \
   --image <registry>.azurecr.io/film-api:<commit-id>
 ```
 
-Check `/health`: it shows the commit ID now running. To go back, run the same command with the previous commit ID.
+Azure creates a new revision, which takes a minute or two while TensorFlow loads the model.
+
+**Step 5: check the result.**
+
+```bash
+az containerapp revision list --name film-api --resource-group "$RG" --output table
+az containerapp logs show --name film-api --resource-group "$RG" --follow
+curl https://film-api.salmonwave-0d78f81f.francecentral.azurecontainerapps.io/health
+```
+
+The newest revision must be active and healthy, and `/health` must show the new commit ID. Open `/docs` and repeat the three cases (valid, empty, very short).
+
+**Roll back.** Run the step 4 command again with the previous commit ID. `/health` shows the old commit ID again, and routes added since (such as `/hello`) disappear.
 Every deployment and rollback is recorded in the version log of [`PROCEDURE_MISE_EN_PRODUCTION.md`](PROCEDURE_MISE_EN_PRODUCTION.md).
+
+**If it fails:**
+
+| What you see | Cause and fix |
+|---|---|
+| `expected one argument` | `$RG` is empty: run `echo "RG=[$RG]"` and set it again (step 1) |
+| `The containerapp 'film-api' does not exist` | wrong resource group or subscription, or the app was deleted: run `az containerapp list --output table` and `az account list --output table`; if the app is gone, create it (see *Container App* above, it needs an existing tag) |
+| `MANIFEST_UNKNOWN` | the tag is not in the registry: check step 2 |
+| `unauthorized` when pulling the image | the app lost its registry login: type the password with `read -s -p "Registry password: " ACR_PASSWORD; echo`, then run `az containerapp registry set --name film-api --resource-group "$RG" --server <registry>.azurecr.io --username <user> --password "$ACR_PASSWORD"` |
+| `/health` still shows the old commit | the new revision is not live yet: wait and check the revision list |
+| the revision keeps restarting | memory below 2 Gi, or the model fails to load: read the logs |
+
+Never paste the registry password in a file or in a chat.
 
 ### Cleaning up
 
@@ -374,6 +487,13 @@ The full end-of-life checklist is in [`FIN_DE_VIE.md`](FIN_DE_VIE.md).
 | `roleAssignments/write` refused | role cannot grant rights | use the registry admin user |
 | Container restarts in a loop | not enough memory | give 2 GB, read `az containerapp logs show` |
 | `Not Found` on the public address | the address alone is not a route | add `/health` or `/docs` |
+| `expected one argument` on `az containerapp update` | `$RG` is empty (new terminal) | `echo "RG=[$RG]"`, then set `RG=` again |
+| `The containerapp 'film-api' does not exist` | wrong resource group or subscription, or the app was deleted | `az containerapp list --output table`, `az account list --output table`; create the app if it is gone |
+| `Cannot connect to the Docker daemon` in Cloud Shell | Cloud Shell has no Docker engine | run `docker` in your own terminal; use Cloud Shell only for `az` |
+| `fatal: not a git repository` in Cloud Shell | the repository is on your own machine | run `git` in the project folder |
+| GitHub asks for a password on `git push` | passwords are no longer accepted | use a personal access token (scopes `repo` and `workflow`), the GitHub CLI or an SSH key |
+| `publier` skipped or red | not on `main`, or a secret name or value is wrong | check the branch and the three secrets |
+| `No event file found` or `KeyError` with `export_training_curves.py` | wrong log folder | pass the session folder, run with `--list` to see the curves |
 
 ---
 
