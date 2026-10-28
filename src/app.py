@@ -1,8 +1,10 @@
 """API de classification de films (horreur / comédie).
 
 Routes :
-    GET  /health   -> statut, version du modèle, identifiant du commit
-    POST /predict  -> classe, probabilité, version
+    GET  /          -> page d'accueil avec le logo
+    GET  /health    -> statut, version du modèle, identifiant du commit
+    POST /predict   -> classe, probabilité, version
+    GET  /docs      -> page de test (Swagger) avec le logo
 """
 import json
 import os
@@ -13,15 +15,24 @@ import joblib
 import spacy
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.exceptions import RequestValidationError
-from fastapi.responses import JSONResponse
+from fastapi.openapi.docs import get_swagger_ui_html
+from fastapi.openapi.utils import get_openapi
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 import keras
 
 MODEL_DIR = Path(os.getenv("MODEL_DIR", Path(__file__).resolve().parent.parent / "model"))
+STATIC_DIR = Path(__file__).resolve().parent / "static"  # logo.png, favicon.ico
 COMMIT = os.getenv("GIT_COMMIT", "unknown")  # injecté à la construction de l'image
 LABELS = {1: "horror", 0: "comedy"}  # même convention que le notebook
 MIN_CHARS = 20
 MAX_CHARS = 5000
+
+DESCRIPTION = (
+    '<img src="/static/logo.png" alt="Film Category API logo" width="120">\n\n'
+    "Predicts whether a film summary (in English) is a **horror** film or a **comedy**."
+)
 
 
 def clean_doc(doc):
@@ -40,7 +51,22 @@ async def lifespan(app: FastAPI):
     yield
 
 
-app = FastAPI(title="Film Category API", lifespan=lifespan)
+# docs_url=None : la page /docs est redéfinie plus bas pour afficher le favicon
+app = FastAPI(title="Film Category API", description=DESCRIPTION, lifespan=lifespan, docs_url=None)
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+
+def custom_openapi():
+    """Ajoute le logo à la page /redoc."""
+    if app.openapi_schema:
+        return app.openapi_schema
+    schema = get_openapi(title=app.title, version=app.version, description=app.description, routes=app.routes)
+    schema["info"]["x-logo"] = {"url": "/static/logo.png"}
+    app.openapi_schema = schema
+    return schema
+
+
+app.openapi = custom_openapi
 
 
 class PredictRequest(BaseModel):
@@ -63,6 +89,48 @@ class PredictResponse(BaseModel):
 async def validation_error_handler(request: Request, exc: RequestValidationError):
     details = [f"{'.'.join(str(p) for p in e['loc'][1:]) or 'body'}: {e['msg']}" for e in exc.errors()]
     return JSONResponse(status_code=422, content={"error": "Requête invalide", "details": details})
+
+
+@app.get("/", response_class=HTMLResponse, include_in_schema=False)
+def home():
+    return """<<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Film Category API</title>
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    body { font-family: system-ui, sans-serif; text-align: center; margin: 4rem 1rem; color: #1f2937; }
+    .logo { width: 200px; height: 200px; border-radius: 16px; }
+    .curves { width: 100%; max-width: 900px; height: auto; }
+    a { color: #1d4ed8; margin: 0 .6rem; }
+  </style>
+</head>
+<body>
+  <img class="logo" src="/static/logo.png" alt="Film Category API logo">
+  <h1>Film Category API</h1>
+  <p>Send a film summary, get back <strong>horror</strong> or <strong>comedy</strong>.</p>
+  <p><a href="/docs">Try it (Swagger)</a> <a href="/redoc">Documentation</a> <a href="/health">Health</a></p>
+
+  <h2>Training curves</h2>
+  <img class="curves" src="/static/training_curves.png" alt="Training curves: loss and accuracy of the final model">
+</body>
+</html>"""
+
+
+@app.get("/favicon.ico", include_in_schema=False)
+def favicon():
+    return FileResponse(STATIC_DIR / "favicon.ico")
+
+
+@app.get("/docs", include_in_schema=False)
+def swagger_ui():
+    return get_swagger_ui_html(
+        openapi_url=app.openapi_url,
+        title=f"{app.title} - docs",
+        swagger_favicon_url="/static/favicon.ico",
+    )
 
 
 @app.get("/health")

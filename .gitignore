@@ -6,3 +6,5 @@ venv/
 notebook/my_log_dir/
 kt_logs/
 *Zone.Identifier
+resources/app_creation.png
+resources/docker_azure_registry.png

@@ -33,12 +33,12 @@ Secrets GitHub (dépôt → Settings → Secrets) : adresse du registre, nom d'u
 
 ## 3. Prérequis
 
-- [ ] `az login` fait (option code d'appareil si la fenêtre de connexion pose problème sous Windows)
-- [ ] Docker Desktop lancé (pour les tests locaux)
-- [ ] Dossier `model/` complet : `model.keras`, `tfidf.joblib`, `metrics.json`, `reference_sample.csv`
-- [ ] Registre créé avec l'utilisateur administrateur activé
-- [ ] Les trois secrets enregistrés dans GitHub
-- [ ] Workflow présent dans `.github/workflows/` (avec un **s**)
+- [x] `az login` fait (option code d'appareil si la fenêtre de connexion pose problème sous Windows)
+- [x] Docker Desktop lancé (pour les tests locaux)
+- [x] Dossier `model/` complet : `model.keras`, `tfidf.joblib`, `metrics.json`, `reference_sample.csv`
+- [x] Registre créé avec l'utilisateur administrateur activé
+- [x] Les trois secrets enregistrés dans GitHub
+- [x] Workflow présent dans `.github/workflows/` (avec un **s**)
 
 ## 4. Procédure de mise en production
 
@@ -155,7 +155,7 @@ Une ligne par déploiement ou retour en arrière. Ne jamais supprimer une ligne 
 
 | Version | Date | Commit (court) | Modèle | F1 test | Changement | Contrôles (`/health`, `/predict`) | Action | Responsable |
 |---|---|---|---|---|---|---|---|---|
-| 1.0.0 | `<jj/mm/aaaa>` | `<sha>` | 1.0.0 | `<0.xx>` | Première mise en ligne : API `/health` et `/predict`, modèle du notebook | `<OK / KO>` | Déploiement | `<nom>` |
+| 1.0.0 | `28/10/2026` | `<sha>` | 1.0.0 | `<0.xx>` | Première mise en ligne : API `/health` et `/predict`, modèle du notebook | `<OK / KO>` | Déploiement | `<nom>` |
 | 1.1.0 | `<jj/mm/aaaa>` | `<sha>` | 1.0.0 | `<0.xx>` | Ajout de la route `/hello` (exercice de mise à jour) | `<OK / KO>` | Déploiement | `<nom>` |
 | 1.0.0 | `<jj/mm/aaaa>` | `<sha de la 1.0.0>` | 1.0.0 | `<0.xx>` | Retour en arrière : `/hello` retirée | `<OK / KO>` | Retour en arrière | `<nom>` |
 | | | | | | | | | |
