@@ -137,6 +137,10 @@ def swagger_ui():
 def health():
     return {"status": "ok", "model_version": app.state.metrics["model_version"], "commit": COMMIT}
 
+@app.get("/hello")
+def hello():
+    return {"message": "Hello from the Film Category API!"}
+
 
 @app.post("/predict", response_model=PredictResponse)
 def predict(request: PredictRequest):

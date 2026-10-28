@@ -20,6 +20,13 @@ def test_health(client):
     assert body["status"] == "ok"
     assert body["model_version"]
     assert "commit" in body
+    
+# ---test hello ---------
+
+def test_hello(client):
+    response = client.get("/hello")
+    assert response.status_code == 200
+    assert "message" in response.json()
 
 
 # --- A valid case works -----------------------------------------------------
