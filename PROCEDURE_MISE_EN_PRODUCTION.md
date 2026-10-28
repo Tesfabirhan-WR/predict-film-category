@@ -168,4 +168,3 @@ Une ligne par déploiement ou retour en arrière. Ne jamais supprimer une ligne 
 **Règle de numérotation :**
 - Nouveau modèle ou changement de comportement de `/predict` : version majeure ou mineure.
 - Nouvelle route ou changement sans impact sur le modèle : version mineure.
-- Correction sans changement de comportement : version de correctif.
