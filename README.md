@@ -75,7 +75,7 @@ predict-film-category/
 ├── data/                          # source dataset (film summaries)
 ├── model/                         # model.keras, tfidf.joblib, metrics.json, reference_sample.csv
 ├── notebook/                      # predFilm.ipynb (8 stages) and TensorBoard logs
-├── resources/                     # logo, diagrams, screenshots and briefs
+├── resources/                     # logo, diagrams, screenshots, briefs and project summary
 ├── src/
 │   ├── app.py                     # FastAPI application
 │   └── static/                    # served by the API at /static
